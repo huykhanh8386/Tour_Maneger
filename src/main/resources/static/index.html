@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Manager - Quản lý Tour Du lịch</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/app.js" defer></script>
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">✈</div>
+            <div>
+                <h2>Tour<span>Manager</span></h2>
+                <small>TRAVEL MANAGEMENT</small>
+            </div>
+        </div>
+        <p class="menu-caption">MENU CHÍNH</p>
+        <nav class="menu">
+            <button class="menu-item active"
+                    data-page="dashboard">
+                <span>▦</span>
+                Tổng quan
+            </button>
+            <button class="menu-item"
+                    data-page="tours">
+                <span>✈</span>
+                Quản lý Tour
+            </button>
+            <button class="menu-item"
+                    data-page="bookings">
+                <span>▤</span>
+                Đặt Tour
+            </button>
+            <button class="menu-item"
+                    data-page="customers"
+                    data-admin
+                    hidden>
+                <span>♧</span>
+                Khách hàng & ADMIN
+            </button>
+            <button class="menu-item"
+                    data-page="reports"
+                    data-admin
+                    hidden>
+                <span>▥</span>
+                Báo cáo
+            </button>
+        </nav>
+        <div class="side-bottom">
+            <div class="welcome-box">
+                <div class="welcome-icon">🌴</div>
+                <h3>Khám phá hành trình</h3>
+                <p>
+                    Quản lý các Tour du lịch, khách hàng,
+                    đặt chỗ và doanh thu trên một hệ thống.
+                </p>
+            </div>
+            <small>TOUR MANAGER © 2026</small>
+        </div>
+
+    </aside>
+    <div class="main">
+        <header class="topbar">
+            <div>
+                <small class="top-caption">
+                    HỆ THỐNG QUẢN LÝ DU LỊCH
+                </small>
+                <h1 id="pageTitle">Tổng quan</h1>
+            </div>
+            <div id="userArea" class="user-area">
+                <button class="btn primary"
+                        id="loginBtn">
+                    Đăng nhập
+                </button>
+            </div>
+        </header>
+        <main class="content">
+            <section class="page active" id="dashboard">
+                <div class="banner">
+                    <div class="banner-content">
+                        <span class="banner-tag">
+                            ✦ TRAVEL MANAGEMENT SYSTEM
+                        </span>
+                        <h2>
+                            Khám phá thế giới
+                            <em>cùng Tour Manager</em>
+                        </h2>
+                        <p>
+                            Hệ thống quản lý Tour du lịch,
+                            thông tin khách hàng,
+                            đặt Tour và thống kê doanh thu.
+                        </p>
+                        <button class="btn white"
+                                data-page="tours">
+                            Khám phá Tour →
+                        </button>
+                    </div>
+                    <div class="banner-art">✈</div>
+                </div>
+                <div class="section-heading">
+                    <div>
+                        <small class="eyebrow">
+                            THỐNG KÊ HỆ THỐNG
+                        </small>
+                        <h2>Tổng quan hoạt động</h2>
+                    </div>
+                </div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-icon green">✈</div>
+                        <p>Tổng số Tour</p>
+                        <h2 id="totalTours">0</h2>
+                        <small>Các Tour đang quản lý</small>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">♧</div>
+                        <p>Khách hàng</p>
+                        <h2 id="totalCustomers">—</h2>
+                        <small>Tổng số khách hàng</small>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">▤</div>
+                        <p>Lượt đặt Tour</p>
+                        <h2 id="totalBookings">—</h2>
+                        <small>Đơn đặt đã xác nhận</small>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">₫</div>
+                        <p>Doanh thu</p>
+                        <h2 id="totalRevenue">—</h2>
+                        <small>Tổng doanh thu các Tour</small>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h3>Tour sắp khởi hành</h3>
+                        <button class="text-btn"
+                                data-page="tours">
+                            Xem tất cả →
+                        </button>
+                    </div>
+                    <div id="upcomingList"
+                         class="upcoming-list">
+                        <p class="empty">
+                            Đang tải danh sách Tour...
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section class="page" id="tours">
+                <div class="section-heading">
+                    <div>
+                        <small class="eyebrow">
+                            DANH SÁCH TOUR
+                        </small>
+                        <h2>Quản lý Tour du lịch</h2>
+                        <p>
+                            Thêm, sửa, xóa và đặt các Tour du lịch.
+                        </p>
+                    </div>
+                    <button class="btn primary"
+                            id="addTourBtn"
+                            data-admin
+                            hidden>
+                        + Thêm Tour
+                    </button>
+                </div>
+                <div class="toolbar">
+                    <input type="search"
+                           id="tourSearch"
+                           placeholder="Tìm tên Tour hoặc điểm đến...">
+                    <span id="tourCount">0 Tour</span>
+                </div>
+                <div id="tourGrid" class="tour-grid">
+                    <p class="empty">
+                        Đang tải danh sách Tour...
+                    </p>
+                </div>
+            </section>
+            <section class="page" id="bookings">
+                <div class="section-heading">
+                    <div>
+                        <small class="eyebrow">
+                            DANH SÁCH ĐẶT CHỖ
+                        </small>
+                        <h2>Quản lý Đặt Tour</h2>
+                        <p>
+                            Theo dõi các lượt đặt Tour và trạng thái.
+                        </p>
+                    </div>
+                    <button class="btn primary"
+                            data-page="tours">
+                        + Đặt Tour mới
+                    </button>
+                </div>
+                <div class="panel table-panel">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Mã đơn</th>
+                                <th>Khách hàng</th>
+                                <th>Tour</th>
+                                <th>Số người</th>
+                                <th>Thành tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody id="bookingTable">
+                            <tr>
+                                <td colspan="7" class="empty">
+                                    Chưa có lượt đặt Tour.
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section class="page" id="customers">
+                <div class="section-heading">
+                    <div>
+                        <small class="eyebrow">
+                            QUẢN LÝ KHÁCH HÀNG
+                        </small>
+                        <h2>Danh sách Khách hàng</h2>
+                        <p>
+                            Quản lý hồ sơ và thông tin liên hệ.
+                        </p>
+                    </div>
+                    <button class="btn primary"
+                            id="addCustomerBtn">
+                        + Thêm khách hàng
+                    </button>
+                </div>
+                <div class="panel table-panel">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ và tên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody id="customerTable">
+                            <tr>
+                                <td colspan="5" class="empty">
+                                    Chưa có khách hàng.
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="section-heading">
+                    <div>
+                        <small class="eyebrow">
+                            QUẢN TRỊ HỆ THỐNG
+                        </small>
+                        <h2>Danh sách ADMIN</h2>
+                        <p>
+                            Thêm tài khoản ADMIN mới và thay đổi
+                            tên quản trị viên.
+                        </p>
+                    </div>
+                    <button class="btn primary"
+                            id="addAdminBtn">
+                        + Thêm ADMIN
+                    </button>
+                </div>
+                <div class="panel table-panel">
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ tên ADMIN</th>
+                                <th>Email</th>
+                                <th>Quyền</th>
+                                <th>Thao tác</th>
+                            </tr>
+                            </thead>
+                            <tbody id="adminTable">
+                            <tr>
+                                <td colspan="5" class="empty">
+                                    Đang tải tài khoản ADMIN...
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section class="page" id="reports">
+                <div class="section-heading">
+                    <div>
+                        <small class="eyebrow">
+                            THỐNG KÊ DOANH THU
+                        </small>
+                        <h2>Báo cáo Tour du lịch</h2>
+                        <p>
+                            Thống kê doanh thu, lượt đặt
+                            và khách hàng theo Tour.
+                        </p>
+                    </div>
+                </div>
+                <div class="panel filter-panel">
+                    <label for="reportTour">
+                        Chọn Tour cần báo cáo
+                    </label>
+                    <select id="reportTour">
+                        <option value="">
+                            -- Chọn Tour --
+                        </option>
+                    </select>
+                </div>
+                <div class="stats report-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon green">₫</div>
+                        <p>Doanh thu Tour</p>
+                        <h2 id="reportRevenue">0 ₫</h2>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">▤</div>
+                        <p>Đơn xác nhận</p>
+                        <h2 id="reportBookings">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">♧</div>
+                        <p>Chỗ đã đặt</p>
+                        <h2 id="reportSeats">0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">✈</div>
+                        <p>Chỗ còn lại</p>
+                        <h2 id="reportAvailable">0</h2>
+                    </div>
+                </div>
+                <div class="panel table-panel">
+                    <div class="panel-heading">
+                        <h3>Khách hàng đã đặt Tour</h3>
+                    </div>
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ tên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                            </tr>
+                            </thead>
+                            <tbody id="reportCustomers">
+                            <tr>
+                                <td colspan="4" class="empty">
+                                    Chọn Tour để xem khách hàng.
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel report-upcoming">
+                    <div class="panel-heading">
+                        <h3>Tour sắp khởi hành</h3>
+                    </div>
+                    <div id="reportUpcoming">
+                        <p class="empty">
+                            Đang tải dữ liệu...
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            © 2026 Tour Manager -
+            Hệ thống Quản lý Tour Du lịch.
+            <a href="/swagger-ui/index.html"
+               target="_blank"
+               rel="noopener noreferrer">
+                Swagger API
+            </a>
+        </footer>
+    </div>
+</div>
+<div id="authModal"
+     class="modal-overlay"
+     hidden>
+    <div class="modal auth-modal">
+        <button id="closeAuth"
+                class="modal-close"
+                aria-label="Đóng">
+            ×
+        </button>
+        <div class="auth-heading">
+            <div class="auth-icon">✈</div>
+            <h2>Tour Manager</h2>
+            <p>
+                Đăng nhập để quản lý và đặt Tour.
+            </p>
+        </div>
+        <div class="auth-tabs">
+            <button type="button"
+                    id="tabLogin"
+                    class="auth-tab active">
+                Đăng nhập
+            </button>
+            <button type="button"
+                    id="tabRegister"
+                    class="auth-tab">
+                Đăng ký
+            </button>
+        </div>
+        <form id="loginForm" class="form">
+            <div class="field">
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail"
+                       type="email"
+                       name="email"
+                       placeholder="Nhập email"
+                       autocomplete="email"
+                       required>
+            </div>
+            <div class="field">
+                <label for="loginPassword">Mật khẩu</label>
+                <input id="loginPassword"
+                       type="password"
+                       name="password"
+                       placeholder="Nhập mật khẩu"
+                       autocomplete="current-password"
+                       required>
+            </div>
+            <button class="btn primary full"
+                    type="submit">
+                Đăng nhập
+            </button>
+        </form>
+        <form id="registerForm"
+              class="form"
+              hidden>
+            <div class="field">
+                <label>Họ và tên</label>
+                <input type="text"
+                       name="fullName"
+                       placeholder="Nguyễn Văn A"
+                       required>
+
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email"
+                       name="email"
+                       placeholder="example@gmail.com"
+                       required>
+
+            </div>
+            <div class="field">
+                <label>Số điện thoại</label>
+                <input type="tel"
+                       name="phone"
+                       pattern="0[35789][0-9]{8}"
+                       placeholder="0912345678"
+                       required>
+
+            </div>
+            <div class="field">
+                <label>Mật khẩu</label>
+                <input type="password"
+                       name="password"
+                       minlength="8"
+                       autocomplete="new-password"
+                       required>
+
+            </div>
+            <button class="btn primary full"
+                    type="submit">
+                Đăng ký tài khoản
+            </button>
+        </form>
+    </div>
+</div>
+<div id="editModal"
+     class="modal-overlay"
+     hidden>
+    <div class="modal edit-modal">
+        <button id="closeEdit"
+                class="modal-close"
+                aria-label="Đóng">×
+        </button>
+        <h2 id="editTitle">Thêm mới</h2>
+        <div id="editContent"></div>
+    </div>
+</div>
+
+
+<div id="toast"
+     class="toast"
+     hidden>
+</div>
+</body>
+</html>
